@@ -1,0 +1,76 @@
+# Redrob Hackathon — Submission Metadata
+
+# ============================================================================
+# Team identity
+# ============================================================================
+team_name: "prateek-kumar-singh"
+
+primary_contact:
+  name: "Prateek Kumar Singh"
+  email: "prateek.singh77085@gmail.com"
+  phone: "+91-XXXXXXXXXX"          # <<< FILL IN YOUR PHONE NUMBER
+
+team_members:
+  - name: "Prateek Kumar Singh"
+    email: "prateek.singh77085@gmail.com"
+    role: "ML Engineer"
+
+# ============================================================================
+# Code and reproducibility
+# ============================================================================
+github_repo: "https://github.com/codebyprateek/redrob-candidate-ranker"
+
+sandbox_link: "https://colab.research.google.com/YOUR_NOTEBOOK" # <<< FILL IN after Colab setup
+
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
+
+# ============================================================================
+# Compute environment
+# ============================================================================
+compute:
+  platform: "Linux Ubuntu 24.04"
+  cpu_cores: 4
+  ram_gb: 16
+  python_version: "3.11"
+  os: "Ubuntu 24.04 LTS"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: false
+  pre_computation_time_minutes: 0
+
+# ============================================================================
+# AI tools declaration
+# ============================================================================
+ai_tools_used:
+  - "Claude"
+
+ai_usage_summary: |
+  Used Claude for architectural discussion and code review.
+  All scoring logic, weights, and feature engineering designed manually
+  based on thorough reading of the JD and signals documentation.
+  No candidate data was fed to any LLM during ranking.
+
+# ============================================================================
+# Approach summary
+# ============================================================================
+methodology_summary: |
+  Multi-dimensional rule-based ranker with five scoring components: (1) skills
+  scoring with proficiency/duration/endorsement weighting, (2) career trajectory
+  scoring evaluating product vs services background and ML work in role descriptions,
+  (3) behavioral/availability signals from redrob_signals, (4) GitHub + assessment
+  proof-points, (5) location fit. Components are combined via weighted sum then
+  multiplied by a disqualifier factor that penalizes wrong-domain titles, pure-research
+  backgrounds, full-services careers, and CV/speech-primary specialists. Honeypot
+  detection identifies profiles with impossible career timelines, expert-in-many-skills
+  with zero duration, and title-skill contradictions. No GPU, no external APIs;
+  runs in ~90 seconds on 100K candidates CPU-only.
+
+# ============================================================================
+# Declarations
+# ============================================================================
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true
